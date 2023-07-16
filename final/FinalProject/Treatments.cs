@@ -1,21 +1,22 @@
 using System;
 
 public class Treatments{
-    private int _treatmentID;
     private string _name;
     private DateTime _date;
-    private string _pictureBefore;
-    private string _pictureAfter;
-    private string _segmentalPhysicalExamination;
     private float _price;
 
-    public Treatments(int id, string name, DateTime date, string pictureB, string pictureA, string sPE, float price){
-        _treatmentID =  id;
-        _name = name;
-        _date = date;
-        _pictureBefore = pictureB;
-        _pictureAfter = pictureA;
-        _segmentalPhysicalExamination = sPE;
-        _price = price;
+    public Treatments(){
+        Console.Write("Treatment Name: ");
+        _name = Console.ReadLine();
+        Console.Write("Treatment Date(dd/mm/yyyy): ");
+        string user = Console.ReadLine();
+        _date = DateTime.Parse(user);
+        Console.Write("Treatment Price(BOB): ");
+        user = Console.ReadLine();
+        _price = float.Parse(user);
+    }
+
+    public void DisplayInfo(){
+        Console.WriteLine($"    - Name: {_name}  Date: {_date.ToShortDateString()}  Price: {_price}");
     }
 }

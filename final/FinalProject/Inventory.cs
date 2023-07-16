@@ -1,16 +1,26 @@
 using System;
 
 public class Inventory{
-    private int _inventoryID;
-    private string _name;
-    private int _amount;
-    private string _notify;
+    protected int _inventoryID;
+    protected string _name;
+    protected int _amount;
+    protected string _notify;
 
-    public Inventory(){
-        _inventoryID++;
-        _name = "null";
-        _amount = 10;
-        _notify = "A lot";
+    public Inventory(int id, string name, int amount, string notify){
+        _inventoryID = id;
+        _name = name;
+        _amount = amount;
+        _notify = notify;
+    }
+
+    public Inventory(int id){
+        _inventoryID = id + 1;
+        Console.Write("  Product Name: ");
+        _name = Console.ReadLine();
+        Console.Write("  Amount: ");
+        string user = Console.ReadLine();
+        _amount = int.Parse(user);
+        NotifyAmount(_amount);
     }
 
     public void SetInventoryID(int id){
@@ -21,7 +31,34 @@ public class Inventory{
         return _inventoryID;
     }
 
+    public void SetAmount(int amount){
+        _amount = amount;
+    }
+
+    public int GetAmount(){
+        return _amount;
+    }
+
+    public void NotifyAmount(int amount){
+        if (amount >= 10)
+        {
+            _notify = "Enough in Stock";
+        }
+        else if(amount >=5)
+        {
+            _notify = "Little in Stock";
+        }
+        else if(amount <= 1)
+        {
+            _notify = "Renew";
+        }
+    }
+
+    public string SaveToFile(){
+        return $"{_inventoryID}:{_name},{_amount},{_notify}";
+    }
+
     public virtual void DisplayInfo(){
-        Console.Write($"ID: {_inventoryID} Name: {_name} Amount: {_amount} Notify: {_notify}");
+        Console.WriteLine($"  ID: {_inventoryID} | Name: {_name} | Amount: {_amount} | Notify: {_notify}");
     }
 }
